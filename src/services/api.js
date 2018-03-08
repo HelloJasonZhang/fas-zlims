@@ -33,6 +33,30 @@ export async function addRule(params) {
   });
 }
 
+export async function queryProjectManage(params) {
+  return request(`/api/projectManage?${stringify(params)}`);
+}
+
+export async function removeProjectManage(params) {
+  return request('/api/projectManage', {
+    method: 'POST',
+    body: {
+      ...params,
+      method: 'delete',
+    },
+  });
+}
+
+export async function addProjectManage(params) {
+  return request('/api/projectManage', {
+    method: 'POST',
+    body: {
+      ...params,
+      method: 'post',
+    },
+  });
+}
+
 export async function fakeSubmitForm(params) {
   return request('/api/forms', {
     method: 'POST',

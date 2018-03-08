@@ -8,6 +8,7 @@ import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import styles from './ProjectManageList.less';
 
 const FormItem = Form.Item;
+const RangePicker = DatePicker.RangePicker;
 const { Option } = Select;
 const getValue = obj => Object.keys(obj).map(key => obj[key]).join(',');
 const statusMap = ['default', 'processing', 'success', 'error'];
@@ -249,19 +250,16 @@ export default class ProjectManageList extends PureComponent {
             <Form onSubmit={this.handleSearch} layout="inline">
                 <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
                     <Col md={8} sm={24}>
-                        <FormItem label="规则编号">
+                        <FormItem label="项目名称">
                             {getFieldDecorator('no')(
                                 <Input placeholder="请输入" />
                             )}
                         </FormItem>
                     </Col>
                     <Col md={8} sm={24}>
-                        <FormItem label="使用状态">
-                            {getFieldDecorator('status')(
-                                <Select placeholder="请选择" style={{ width: '100%' }}>
-                                    <Option value="0">关闭</Option>
-                                    <Option value="1">运行中</Option>
-                                </Select>
+                        <FormItem label="公司简称">
+                            {getFieldDecorator('companyName')(
+                                <Input placeholder="请输入" />
                             )}
                         </FormItem>
                     </Col>
@@ -285,55 +283,39 @@ export default class ProjectManageList extends PureComponent {
             <Form onSubmit={this.handleSearch} layout="inline">
                 <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
                     <Col md={8} sm={24}>
-                        <FormItem label="规则编号">
+                        <FormItem label="项目名称">
                             {getFieldDecorator('no')(
                                 <Input placeholder="请输入" />
                             )}
                         </FormItem>
                     </Col>
                     <Col md={8} sm={24}>
-                        <FormItem label="使用状态">
-                            {getFieldDecorator('status')(
-                                <Select placeholder="请选择" style={{ width: '100%' }}>
-                                    <Option value="0">关闭</Option>
-                                    <Option value="1">运行中</Option>
-                                </Select>
+                        <FormItem label="公司简称">
+                            {getFieldDecorator('companyName')(
+                                <Input placeholder="请输入" />
                             )}
                         </FormItem>
                     </Col>
                     <Col md={8} sm={24}>
-                        <FormItem label="调用次数">
-                            {getFieldDecorator('number')(
-                                <InputNumber style={{ width: '100%' }} />
+                        <FormItem label="收样日期">
+                            {getFieldDecorator('range-picker')(
+                                <RangePicker style={{ width: '100%' }} />
                             )}
                         </FormItem>
                     </Col>
                 </Row>
                 <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
                     <Col md={8} sm={24}>
-                        <FormItem label="更新日期">
+                        <FormItem label="交付日期 ">
                             {getFieldDecorator('date')(
-                                <DatePicker style={{ width: '100%' }} placeholder="请输入更新日期" />
+                                <RangePicker style={{ width: '100%' }} />
                             )}
                         </FormItem>
                     </Col>
                     <Col md={8} sm={24}>
-                        <FormItem label="使用状态">
-                            {getFieldDecorator('status3')(
-                                <Select placeholder="请选择" style={{ width: '100%' }}>
-                                    <Option value="0">关闭</Option>
-                                    <Option value="1">运行中</Option>
-                                </Select>
-                            )}
-                        </FormItem>
-                    </Col>
-                    <Col md={8} sm={24}>
-                        <FormItem label="使用状态">
-                            {getFieldDecorator('status4')(
-                                <Select placeholder="请选择" style={{ width: '100%' }}>
-                                    <Option value="0">关闭</Option>
-                                    <Option value="1">运行中</Option>
-                                </Select>
+                        <FormItem label="联系人">
+                            {getFieldDecorator('companyName')(
+                                <Input placeholder="请输入" />
                             )}
                         </FormItem>
                     </Col>
@@ -379,23 +361,9 @@ export default class ProjectManageList extends PureComponent {
                             {this.renderForm()}
                         </div>
                         <div className={styles.tableListOperator}>
-                            <Button icon="plus" type="primary" onClick={() => this.handleModalVisible(true)}>
-                                新建
-              </Button>
-                           
-                            {
-                                selectedRows.length > 0 && (
-                                    <span>
-                                        <Button>批量操作</Button>
-                                        <Dropdown overlay={menu}>
-                                            <Button>
-                                                更多操作 <Icon type="down" />
-                                            </Button>
-                                        </Dropdown>
-                                    </span>
-                                )
-                            }
-
+                            <Button icon="plus" type="primary" onClick={() => this.handleModalVisible(true)}>创建项目 </Button>
+                            <Button icon="upload" type="primary" onClick={() => this.handleModalVisible(true)}>批量导入 </Button>
+                            <Button icon="download" type="primary" onClick={() => this.handleModalVisible(true)}>批量导出</Button>
                         </div>
                         <StandardTable
                             selectedRows={selectedRows}
